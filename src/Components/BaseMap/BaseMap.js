@@ -4,8 +4,6 @@ import MapGL,{Marker, GeolocateControl,Popup} from 'react-map-gl';
 import Pin from './pin.js'
 import SideDrawer from '../SideDrawer/SideDrawer'
 import './BaseMapStyle.css'
-import RGBA from '../Images/rgba.png'
-import MERGED from '../Images/merged.png'
 
 
 const TOKEN = 'pk.eyJ1IjoicGF0ZWwycGEiLCJhIjoiY2sxMnkyczM0MDNxOTNiczluMnRyY2tsMiJ9.0maYtnNj3fQVEJ2BLfvJXA'; // Set your mapbox token here
@@ -16,17 +14,11 @@ const MapStyle = {
 
   const geolocateStyle = {
     position: 'absolute',
-    bottom: 0,
+    top: 0,
     right: 0,
     margin: 10,   
   };
 
-  const DefaultOverlayBounds = [
-    [-78.4989250540139,37.9307066927,-78.4950953896, 37.933022282],
-    [-78.4977459718528, 37.92754239722171,-78.49195042016456, 37.9330963517]
-  ]
-
-  const DefaultOverlays = [RGBA,MERGED]
 
   
 export default class Test2 extends Component {
@@ -165,21 +157,6 @@ export default class Test2 extends Component {
     );
   };
 
-  renderDefaultOverlay = () =>{
-    for(let i = 0; i<DefaultOverlays.length;i++)
-    return (<DeckGL
-      viewState={this.state.viewport}
-      layers={[
-        new BitmapLayer({
-            id: 'bitmap-layer',
-            bounds: DefaultOverlayBounds[i],
-            image: DefaultOverlays[i],
-            transparentColor: [0,0,0,0]
-          })
-      ]}
-    />
-    )
-  }
 
   render() {
 
@@ -200,7 +177,6 @@ export default class Test2 extends Component {
           mapboxApiAccessToken={TOKEN}
           onClick = {(e)=>this._onClickMethod(MapGL,e)}
         >
-          {this.renderDefaultOverlay()}
           {this.renderOverlayImages()}
           {this.renderMarkersandPin()}
           {this.RenderPopups()}
